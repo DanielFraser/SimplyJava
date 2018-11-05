@@ -1,0 +1,726 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+    ELSE
+    IF
+    NEWLINE
+    THEN
+    WHILE
+
+Grammar
+
+Rule 0     S' -> function
+Rule 1     function -> func ( ) { }
+Rule 2     function -> func ( ) { stmtlist }
+Rule 3     func -> MAIN
+Rule 4     function -> stmtlist
+Rule 5     stmtlist -> stmtlist stmt2 ;
+Rule 6     stmtlist -> stmt2 ;
+Rule 7     stmt2 -> stmt
+Rule 8     stmt -> expression
+Rule 9     stmt -> type ID = expression
+Rule 10    stmt -> type ID
+Rule 11    type -> BOOL
+Rule 12    type -> CHAR
+Rule 13    type -> BYTE
+Rule 14    type -> SHORT
+Rule 15    type -> INT
+Rule 16    type -> LONG
+Rule 17    type -> DOUBLE
+Rule 18    type -> FLOAT
+Rule 19    stmt -> ID = expression
+Rule 20    expression -> expression PLUS term
+Rule 21    expression -> expression MINUS term
+Rule 22    term -> term TIMES factor
+Rule 23    term -> term DIVIDE factor
+Rule 24    expression -> term
+Rule 25    term -> factor
+Rule 26    factor -> NUMBER
+Rule 27    factor -> ( expression )
+
+Terminals, with rules where they appear
+
+(                    : 1 2 27
+)                    : 1 2 27
+;                    : 5 6
+=                    : 9 19
+BOOL                 : 11
+BYTE                 : 13
+CHAR                 : 12
+COMMENT              : 
+DIVIDE               : 23
+DOUBLE               : 17
+ELSE                 : 
+FLOAT                : 18
+ID                   : 9 10 19
+IF                   : 
+INT                  : 15
+LONG                 : 16
+MAIN                 : 3
+MINUS                : 21
+NEWLINE              : 
+NUMBER               : 26
+PLUS                 : 20
+SHORT                : 14
+THEN                 : 
+TIMES                : 22
+WHILE                : 
+error                : 
+{                    : 1 2
+}                    : 1 2
+
+Nonterminals, with rules where they appear
+
+expression           : 8 9 19 20 21 27
+factor               : 22 23 25
+func                 : 1 2
+function             : 0
+stmt                 : 7
+stmt2                : 5 6
+stmtlist             : 2 4 5
+term                 : 20 21 22 23 24
+type                 : 9 10
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . function
+    (1) function -> . func ( ) { }
+    (2) function -> . func ( ) { stmtlist }
+    (4) function -> . stmtlist
+    (3) func -> . MAIN
+    (5) stmtlist -> . stmtlist stmt2 ;
+    (6) stmtlist -> . stmt2 ;
+    (7) stmt2 -> . stmt
+    (8) stmt -> . expression
+    (9) stmt -> . type ID = expression
+    (10) stmt -> . type ID
+    (19) stmt -> . ID = expression
+    (20) expression -> . expression PLUS term
+    (21) expression -> . expression MINUS term
+    (24) expression -> . term
+    (11) type -> . BOOL
+    (12) type -> . CHAR
+    (13) type -> . BYTE
+    (14) type -> . SHORT
+    (15) type -> . INT
+    (16) type -> . LONG
+    (17) type -> . DOUBLE
+    (18) type -> . FLOAT
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    MAIN            shift and go to state 5
+    ID              shift and go to state 10
+    BOOL            shift and go to state 12
+    CHAR            shift and go to state 13
+    BYTE            shift and go to state 14
+    SHORT           shift and go to state 15
+    INT             shift and go to state 16
+    LONG            shift and go to state 17
+    DOUBLE          shift and go to state 18
+    FLOAT           shift and go to state 19
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    function                       shift and go to state 1
+    func                           shift and go to state 2
+    stmtlist                       shift and go to state 4
+    stmt2                          shift and go to state 6
+    stmt                           shift and go to state 7
+    expression                     shift and go to state 8
+    type                           shift and go to state 9
+    term                           shift and go to state 11
+    factor                         shift and go to state 20
+
+state 1
+
+    (0) S' -> function .
+
+
+
+state 2
+
+    (1) function -> func . ( ) { }
+    (2) function -> func . ( ) { stmtlist }
+
+    (               shift and go to state 22
+
+
+state 3
+
+    (27) factor -> ( . expression )
+    (20) expression -> . expression PLUS term
+    (21) expression -> . expression MINUS term
+    (24) expression -> . term
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    expression                     shift and go to state 23
+    term                           shift and go to state 11
+    factor                         shift and go to state 20
+
+state 4
+
+    (4) function -> stmtlist .
+    (5) stmtlist -> stmtlist . stmt2 ;
+    (7) stmt2 -> . stmt
+    (8) stmt -> . expression
+    (9) stmt -> . type ID = expression
+    (10) stmt -> . type ID
+    (19) stmt -> . ID = expression
+    (20) expression -> . expression PLUS term
+    (21) expression -> . expression MINUS term
+    (24) expression -> . term
+    (11) type -> . BOOL
+    (12) type -> . CHAR
+    (13) type -> . BYTE
+    (14) type -> . SHORT
+    (15) type -> . INT
+    (16) type -> . LONG
+    (17) type -> . DOUBLE
+    (18) type -> . FLOAT
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    $end            reduce using rule 4 (function -> stmtlist .)
+    ID              shift and go to state 10
+    BOOL            shift and go to state 12
+    CHAR            shift and go to state 13
+    BYTE            shift and go to state 14
+    SHORT           shift and go to state 15
+    INT             shift and go to state 16
+    LONG            shift and go to state 17
+    DOUBLE          shift and go to state 18
+    FLOAT           shift and go to state 19
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    stmt2                          shift and go to state 24
+    stmt                           shift and go to state 7
+    expression                     shift and go to state 8
+    type                           shift and go to state 9
+    term                           shift and go to state 11
+    factor                         shift and go to state 20
+
+state 5
+
+    (3) func -> MAIN .
+
+    (               reduce using rule 3 (func -> MAIN .)
+
+
+state 6
+
+    (6) stmtlist -> stmt2 . ;
+
+    ;               shift and go to state 25
+
+
+state 7
+
+    (7) stmt2 -> stmt .
+
+    ;               reduce using rule 7 (stmt2 -> stmt .)
+
+
+state 8
+
+    (8) stmt -> expression .
+    (20) expression -> expression . PLUS term
+    (21) expression -> expression . MINUS term
+
+    ;               reduce using rule 8 (stmt -> expression .)
+    PLUS            shift and go to state 26
+    MINUS           shift and go to state 27
+
+
+state 9
+
+    (9) stmt -> type . ID = expression
+    (10) stmt -> type . ID
+
+    ID              shift and go to state 28
+
+
+state 10
+
+    (19) stmt -> ID . = expression
+
+    =               shift and go to state 29
+
+
+state 11
+
+    (24) expression -> term .
+    (22) term -> term . TIMES factor
+    (23) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 24 (expression -> term .)
+    MINUS           reduce using rule 24 (expression -> term .)
+    ;               reduce using rule 24 (expression -> term .)
+    )               reduce using rule 24 (expression -> term .)
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+
+state 12
+
+    (11) type -> BOOL .
+
+    ID              reduce using rule 11 (type -> BOOL .)
+
+
+state 13
+
+    (12) type -> CHAR .
+
+    ID              reduce using rule 12 (type -> CHAR .)
+
+
+state 14
+
+    (13) type -> BYTE .
+
+    ID              reduce using rule 13 (type -> BYTE .)
+
+
+state 15
+
+    (14) type -> SHORT .
+
+    ID              reduce using rule 14 (type -> SHORT .)
+
+
+state 16
+
+    (15) type -> INT .
+
+    ID              reduce using rule 15 (type -> INT .)
+
+
+state 17
+
+    (16) type -> LONG .
+
+    ID              reduce using rule 16 (type -> LONG .)
+
+
+state 18
+
+    (17) type -> DOUBLE .
+
+    ID              reduce using rule 17 (type -> DOUBLE .)
+
+
+state 19
+
+    (18) type -> FLOAT .
+
+    ID              reduce using rule 18 (type -> FLOAT .)
+
+
+state 20
+
+    (25) term -> factor .
+
+    TIMES           reduce using rule 25 (term -> factor .)
+    DIVIDE          reduce using rule 25 (term -> factor .)
+    PLUS            reduce using rule 25 (term -> factor .)
+    MINUS           reduce using rule 25 (term -> factor .)
+    ;               reduce using rule 25 (term -> factor .)
+    )               reduce using rule 25 (term -> factor .)
+
+
+state 21
+
+    (26) factor -> NUMBER .
+
+    TIMES           reduce using rule 26 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 26 (factor -> NUMBER .)
+    PLUS            reduce using rule 26 (factor -> NUMBER .)
+    MINUS           reduce using rule 26 (factor -> NUMBER .)
+    ;               reduce using rule 26 (factor -> NUMBER .)
+    )               reduce using rule 26 (factor -> NUMBER .)
+
+
+state 22
+
+    (1) function -> func ( . ) { }
+    (2) function -> func ( . ) { stmtlist }
+
+    )               shift and go to state 32
+
+
+state 23
+
+    (27) factor -> ( expression . )
+    (20) expression -> expression . PLUS term
+    (21) expression -> expression . MINUS term
+
+    )               shift and go to state 33
+    PLUS            shift and go to state 26
+    MINUS           shift and go to state 27
+
+
+state 24
+
+    (5) stmtlist -> stmtlist stmt2 . ;
+
+    ;               shift and go to state 34
+
+
+state 25
+
+    (6) stmtlist -> stmt2 ; .
+
+    ID              reduce using rule 6 (stmtlist -> stmt2 ; .)
+    BOOL            reduce using rule 6 (stmtlist -> stmt2 ; .)
+    CHAR            reduce using rule 6 (stmtlist -> stmt2 ; .)
+    BYTE            reduce using rule 6 (stmtlist -> stmt2 ; .)
+    SHORT           reduce using rule 6 (stmtlist -> stmt2 ; .)
+    INT             reduce using rule 6 (stmtlist -> stmt2 ; .)
+    LONG            reduce using rule 6 (stmtlist -> stmt2 ; .)
+    DOUBLE          reduce using rule 6 (stmtlist -> stmt2 ; .)
+    FLOAT           reduce using rule 6 (stmtlist -> stmt2 ; .)
+    NUMBER          reduce using rule 6 (stmtlist -> stmt2 ; .)
+    (               reduce using rule 6 (stmtlist -> stmt2 ; .)
+    $end            reduce using rule 6 (stmtlist -> stmt2 ; .)
+    }               reduce using rule 6 (stmtlist -> stmt2 ; .)
+
+
+state 26
+
+    (20) expression -> expression PLUS . term
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    term                           shift and go to state 35
+    factor                         shift and go to state 20
+
+state 27
+
+    (21) expression -> expression MINUS . term
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    term                           shift and go to state 36
+    factor                         shift and go to state 20
+
+state 28
+
+    (9) stmt -> type ID . = expression
+    (10) stmt -> type ID .
+
+    =               shift and go to state 37
+    ;               reduce using rule 10 (stmt -> type ID .)
+
+
+state 29
+
+    (19) stmt -> ID = . expression
+    (20) expression -> . expression PLUS term
+    (21) expression -> . expression MINUS term
+    (24) expression -> . term
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    expression                     shift and go to state 38
+    term                           shift and go to state 11
+    factor                         shift and go to state 20
+
+state 30
+
+    (22) term -> term TIMES . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    factor                         shift and go to state 39
+
+state 31
+
+    (23) term -> term DIVIDE . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    factor                         shift and go to state 40
+
+state 32
+
+    (1) function -> func ( ) . { }
+    (2) function -> func ( ) . { stmtlist }
+
+    {               shift and go to state 41
+
+
+state 33
+
+    (27) factor -> ( expression ) .
+
+    TIMES           reduce using rule 27 (factor -> ( expression ) .)
+    DIVIDE          reduce using rule 27 (factor -> ( expression ) .)
+    PLUS            reduce using rule 27 (factor -> ( expression ) .)
+    MINUS           reduce using rule 27 (factor -> ( expression ) .)
+    ;               reduce using rule 27 (factor -> ( expression ) .)
+    )               reduce using rule 27 (factor -> ( expression ) .)
+
+
+state 34
+
+    (5) stmtlist -> stmtlist stmt2 ; .
+
+    ID              reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    BOOL            reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    CHAR            reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    BYTE            reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    SHORT           reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    INT             reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    LONG            reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    DOUBLE          reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    FLOAT           reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    NUMBER          reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    (               reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    $end            reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+    }               reduce using rule 5 (stmtlist -> stmtlist stmt2 ; .)
+
+
+state 35
+
+    (20) expression -> expression PLUS term .
+    (22) term -> term . TIMES factor
+    (23) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 20 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 20 (expression -> expression PLUS term .)
+    ;               reduce using rule 20 (expression -> expression PLUS term .)
+    )               reduce using rule 20 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+
+state 36
+
+    (21) expression -> expression MINUS term .
+    (22) term -> term . TIMES factor
+    (23) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 21 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 21 (expression -> expression MINUS term .)
+    ;               reduce using rule 21 (expression -> expression MINUS term .)
+    )               reduce using rule 21 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 30
+    DIVIDE          shift and go to state 31
+
+
+state 37
+
+    (9) stmt -> type ID = . expression
+    (20) expression -> . expression PLUS term
+    (21) expression -> . expression MINUS term
+    (24) expression -> . term
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    expression                     shift and go to state 42
+    term                           shift and go to state 11
+    factor                         shift and go to state 20
+
+state 38
+
+    (19) stmt -> ID = expression .
+    (20) expression -> expression . PLUS term
+    (21) expression -> expression . MINUS term
+
+    ;               reduce using rule 19 (stmt -> ID = expression .)
+    PLUS            shift and go to state 26
+    MINUS           shift and go to state 27
+
+
+state 39
+
+    (22) term -> term TIMES factor .
+
+    TIMES           reduce using rule 22 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 22 (term -> term TIMES factor .)
+    PLUS            reduce using rule 22 (term -> term TIMES factor .)
+    MINUS           reduce using rule 22 (term -> term TIMES factor .)
+    ;               reduce using rule 22 (term -> term TIMES factor .)
+    )               reduce using rule 22 (term -> term TIMES factor .)
+
+
+state 40
+
+    (23) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 23 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 23 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 23 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 23 (term -> term DIVIDE factor .)
+    ;               reduce using rule 23 (term -> term DIVIDE factor .)
+    )               reduce using rule 23 (term -> term DIVIDE factor .)
+
+
+state 41
+
+    (1) function -> func ( ) { . }
+    (2) function -> func ( ) { . stmtlist }
+    (5) stmtlist -> . stmtlist stmt2 ;
+    (6) stmtlist -> . stmt2 ;
+    (7) stmt2 -> . stmt
+    (8) stmt -> . expression
+    (9) stmt -> . type ID = expression
+    (10) stmt -> . type ID
+    (19) stmt -> . ID = expression
+    (20) expression -> . expression PLUS term
+    (21) expression -> . expression MINUS term
+    (24) expression -> . term
+    (11) type -> . BOOL
+    (12) type -> . CHAR
+    (13) type -> . BYTE
+    (14) type -> . SHORT
+    (15) type -> . INT
+    (16) type -> . LONG
+    (17) type -> . DOUBLE
+    (18) type -> . FLOAT
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    }               shift and go to state 43
+    ID              shift and go to state 10
+    BOOL            shift and go to state 12
+    CHAR            shift and go to state 13
+    BYTE            shift and go to state 14
+    SHORT           shift and go to state 15
+    INT             shift and go to state 16
+    LONG            shift and go to state 17
+    DOUBLE          shift and go to state 18
+    FLOAT           shift and go to state 19
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    stmtlist                       shift and go to state 44
+    stmt2                          shift and go to state 6
+    stmt                           shift and go to state 7
+    expression                     shift and go to state 8
+    type                           shift and go to state 9
+    term                           shift and go to state 11
+    factor                         shift and go to state 20
+
+state 42
+
+    (9) stmt -> type ID = expression .
+    (20) expression -> expression . PLUS term
+    (21) expression -> expression . MINUS term
+
+    ;               reduce using rule 9 (stmt -> type ID = expression .)
+    PLUS            shift and go to state 26
+    MINUS           shift and go to state 27
+
+
+state 43
+
+    (1) function -> func ( ) { } .
+
+    $end            reduce using rule 1 (function -> func ( ) { } .)
+
+
+state 44
+
+    (2) function -> func ( ) { stmtlist . }
+    (5) stmtlist -> stmtlist . stmt2 ;
+    (7) stmt2 -> . stmt
+    (8) stmt -> . expression
+    (9) stmt -> . type ID = expression
+    (10) stmt -> . type ID
+    (19) stmt -> . ID = expression
+    (20) expression -> . expression PLUS term
+    (21) expression -> . expression MINUS term
+    (24) expression -> . term
+    (11) type -> . BOOL
+    (12) type -> . CHAR
+    (13) type -> . BYTE
+    (14) type -> . SHORT
+    (15) type -> . INT
+    (16) type -> . LONG
+    (17) type -> . DOUBLE
+    (18) type -> . FLOAT
+    (22) term -> . term TIMES factor
+    (23) term -> . term DIVIDE factor
+    (25) term -> . factor
+    (26) factor -> . NUMBER
+    (27) factor -> . ( expression )
+
+    }               shift and go to state 45
+    ID              shift and go to state 10
+    BOOL            shift and go to state 12
+    CHAR            shift and go to state 13
+    BYTE            shift and go to state 14
+    SHORT           shift and go to state 15
+    INT             shift and go to state 16
+    LONG            shift and go to state 17
+    DOUBLE          shift and go to state 18
+    FLOAT           shift and go to state 19
+    NUMBER          shift and go to state 21
+    (               shift and go to state 3
+
+    stmt2                          shift and go to state 24
+    stmt                           shift and go to state 7
+    expression                     shift and go to state 8
+    type                           shift and go to state 9
+    term                           shift and go to state 11
+    factor                         shift and go to state 20
+
+state 45
+
+    (2) function -> func ( ) { stmtlist } .
+
+    $end            reduce using rule 2 (function -> func ( ) { stmtlist } .)
+
