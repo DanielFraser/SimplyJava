@@ -3,37 +3,73 @@ import ply.yacc as yacc
 # Get the token map from the lexer.  This is required.
 from flex import tokens
 from FileHandler import addToFile
-from utility import findVar, addVar, convert
+from utility import findVar, addVar, convert, isType, addclass
+
 
 def p_class(p):
-    '''class : CLASS acs ID '{' '''
+    '''class : CLASS acs classname '{' fnclist '}' '''
+
+
+
+
+def p_classname(p):
+    ''' classname : ID '''
+    addclass(p[3])
+
+
+def p_acs(p):
+    ''' acs : PRIVATE
+            | PUBLIC
+            | PROTECTED '''
+    addToFile(text=convert(p[1]) + " ")
+
+
+def p_funclst(p):
+    '''fnclist : fnclist function
+                | function '''
+
+
+def p_stmtlist(p):
+    '''stmtlist : stmtlist stmt ';'
+            | stmt ';'
+            | '''
+
+
+def p_stmt(p):
+    '''stmt : ifstmt
+            | loopstnt
+            | switchstmt
+            | assignstmt'''
+    p[0] = p[1]
 
 
 def p_function(p):
-    '''function : func '(' ')' '{' '}'
-                | func '(' ')' '{' stmtlist '}' '''
+    '''function : func '(' arglist ')' '{' stmtlist '}' '''
     addToFile(text="}")
 
-def p_func(p):
-    '''func : MAIN'''
-    addToFile(text="public static void main(String [] args) {")
 
-def p_fnc_stmt(p):
-    '''function : stmtlist'''
+def p_arglist(p):
+    '''arglist : args
+                | '''
 
-def p_stmtlist(p):
-    '''stmtlist : stmtlist stmt2 ';'
-            | stmt2 ';' '''
-    pass
 
-def p_stmt2(p):
-    'stmt2 : stmt'
-    addToFile(text=p[1] + ";")
-    p[0] = p[1]
+def p_args(p):
+    '''args : args ',' type ID
+            | type ID'''
 
-def p_stmt(p):
-    'stmt : expression'
-    p[0] = p[1]
+
+def p_main(p):
+    '''func : MAIN
+            | acs static rettype ID '''
+    if p[1] == 'main':
+        addToFile(text="public static void main(String [] args) {")
+    else:
+        addToFile(text="public static void main(String [] args) {")
+
+
+def p_rettype(p):
+    '''rettype : type '''
+
 
 def p_declare(p):
     '''stmt : type ID '=' expression
@@ -43,6 +79,7 @@ def p_declare(p):
     else:
         raise SyntaxError
 
+
 def p_type(p):
     '''type : BOOL
             | CHAR
@@ -51,10 +88,12 @@ def p_type(p):
             | INT
             | LONG
             | DOUBLE
-            | FLOAT '''
-    if not type(p[1]):
+            | FLOAT
+            | ID '''
+    if not isType(p[1]):
         raise SyntaxError
     p[0] = convert(p[1])
+
 
 def p_assign(p):
     '''stmt : ID '=' expression '''
@@ -66,33 +105,38 @@ def p_assign(p):
 
 
 def p_binary_operators(p):
-     '''expression : expression PLUS term
-                  | expression MINUS term
-       term       : term TIMES factor
-                  | term DIVIDE factor'''
+    '''expression : expression PLUS term
+                 | expression MINUS term
+      term       : term TIMES factor
+                 | term DIVIDE factor'''
 
-     p[0] = ' '.join(str(e) for e in p[1:])
+    p[0] = ' '.join(str(e) for e in p[1:])
 
 
 def p_expression_term(p):
     'expression : term'
     p[0] = p[1]
 
+
 def p_term_factor(p):
     'term : factor'
     p[0] = p[1]
+
 
 def p_factor_num(p):
     'factor : NUMBER'
     p[0] = p[1]
 
+
 def p_factor_expr(p):
     '''factor : '(' expression ')' '''
     p[0] = p[2]
 
+
 # Error rule for syntax errors
 def p_error(p):
     print("Syntax error in input!")
+
 
 # Build the parser
 parser = yacc.yacc()

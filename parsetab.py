@@ -6,7 +6,7 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = "BOOL BYTE CHAR COMMENT DIVIDE DOUBLE ELSE FLOAT ID IF INT LONG MAIN MINUS NEWLINE NUMBER PLUS SHORT THEN TIMES WHILEfunction : func '(' ')' '{' '}'\n                | func '(' ')' '{' stmtlist '}' func : MAINfunction : stmtliststmtlist : stmtlist stmt2 ';'\n            | stmt2 ';' stmt2 : stmtstmt : expressionstmt : type ID '=' expression\n            | type ID type : BOOL\n            | CHAR\n            | BYTE\n            | SHORT\n            | INT\n            | LONG\n            | DOUBLE\n            | FLOAT stmt : ID '=' expression expression : expression PLUS term\n                  | expression MINUS term\n       term       : term TIMES factor\n                  | term DIVIDE factorexpression : termterm : factorfactor : NUMBERfactor : '(' expression ')' "
+_lr_signature = "BOOL BYTE CHAR CLASS COMMENT DIVIDE DOUBLE ELSE FLOAT ID IF INT LONG MAIN MINUS NEWLINE NUMBER PLUS PRIVATE PROTECTED PUBLIC SHORT THEN TIMES WHILEfunction : func '(' ')' '{' '}'\n                | func '(' ')' '{' stmtlist '}' func : MAINfunction : stmtliststmtlist : stmtlist stmt2 ';'\n            | stmt2 ';' stmt2 : stmtstmt : expressionstmt : type ID '=' expression\n            | type ID type : BOOL\n            | CHAR\n            | BYTE\n            | SHORT\n            | INT\n            | LONG\n            | DOUBLE\n            | FLOAT stmt : ID '=' expression expression : expression PLUS term\n                  | expression MINUS term\n       term       : term TIMES factor\n                  | term DIVIDE factorexpression : termterm : factorfactor : NUMBERfactor : '(' expression ')' "
     
 _lr_action_items = {'MAIN':([0,],[5,]),'ID':([0,4,9,12,13,14,15,16,17,18,19,25,34,41,44,],[10,10,28,-11,-12,-13,-14,-15,-16,-17,-18,-6,-5,10,10,]),'BOOL':([0,4,25,34,41,44,],[12,12,-6,-5,12,12,]),'CHAR':([0,4,25,34,41,44,],[13,13,-6,-5,13,13,]),'BYTE':([0,4,25,34,41,44,],[14,14,-6,-5,14,14,]),'SHORT':([0,4,25,34,41,44,],[15,15,-6,-5,15,15,]),'INT':([0,4,25,34,41,44,],[16,16,-6,-5,16,16,]),'LONG':([0,4,25,34,41,44,],[17,17,-6,-5,17,17,]),'DOUBLE':([0,4,25,34,41,44,],[18,18,-6,-5,18,18,]),'FLOAT':([0,4,25,34,41,44,],[19,19,-6,-5,19,19,]),'NUMBER':([0,3,4,25,26,27,29,30,31,34,37,41,44,],[21,21,21,-6,21,21,21,21,21,-5,21,21,21,]),'(':([0,2,3,4,5,25,26,27,29,30,31,34,37,41,44,],[3,22,3,3,-3,-6,3,3,3,3,3,-5,3,3,3,]),'$end':([1,4,25,34,43,45,],[0,-4,-6,-5,-1,-2,]),';':([6,7,8,11,20,21,24,28,33,35,36,38,39,40,42,],[25,-7,-8,-24,-25,-26,34,-10,-27,-20,-21,-19,-22,-23,-9,]),'PLUS':([8,11,20,21,23,33,35,36,38,39,40,42,],[26,-24,-25,-26,26,-27,-20,-21,26,-22,-23,26,]),'MINUS':([8,11,20,21,23,33,35,36,38,39,40,42,],[27,-24,-25,-26,27,-27,-20,-21,27,-22,-23,27,]),'=':([10,28,],[29,37,]),')':([11,20,21,22,23,33,35,36,39,40,],[-24,-25,-26,32,33,-27,-20,-21,-22,-23,]),'TIMES':([11,20,21,33,35,36,39,40,],[30,-25,-26,-27,30,30,-22,-23,]),'DIVIDE':([11,20,21,33,35,36,39,40,],[31,-25,-26,-27,31,31,-22,-23,]),'}':([25,34,41,44,],[-6,-5,43,45,]),'{':([32,],[41,]),}
 
@@ -27,31 +27,31 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> function","S'",1,None,None,None),
-  ('function -> func ( ) { }','function',5,'p_function','bison.py',10),
-  ('function -> func ( ) { stmtlist }','function',6,'p_function','bison.py',11),
-  ('func -> MAIN','func',1,'p_func','bison.py',15),
-  ('function -> stmtlist','function',1,'p_fnc_stmt','bison.py',19),
-  ('stmtlist -> stmtlist stmt2 ;','stmtlist',3,'p_stmtlist','bison.py',22),
-  ('stmtlist -> stmt2 ;','stmtlist',2,'p_stmtlist','bison.py',23),
-  ('stmt2 -> stmt','stmt2',1,'p_stmt2','bison.py',27),
-  ('stmt -> expression','stmt',1,'p_stmt','bison.py',32),
-  ('stmt -> type ID = expression','stmt',4,'p_declare','bison.py',36),
-  ('stmt -> type ID','stmt',2,'p_declare','bison.py',37),
-  ('type -> BOOL','type',1,'p_type','bison.py',44),
-  ('type -> CHAR','type',1,'p_type','bison.py',45),
-  ('type -> BYTE','type',1,'p_type','bison.py',46),
-  ('type -> SHORT','type',1,'p_type','bison.py',47),
-  ('type -> INT','type',1,'p_type','bison.py',48),
-  ('type -> LONG','type',1,'p_type','bison.py',49),
-  ('type -> DOUBLE','type',1,'p_type','bison.py',50),
-  ('type -> FLOAT','type',1,'p_type','bison.py',51),
-  ('stmt -> ID = expression','stmt',3,'p_assign','bison.py',57),
-  ('expression -> expression PLUS term','expression',3,'p_binary_operators','bison.py',66),
-  ('expression -> expression MINUS term','expression',3,'p_binary_operators','bison.py',67),
-  ('term -> term TIMES factor','term',3,'p_binary_operators','bison.py',68),
-  ('term -> term DIVIDE factor','term',3,'p_binary_operators','bison.py',69),
-  ('expression -> term','expression',1,'p_expression_term','bison.py',75),
-  ('term -> factor','term',1,'p_term_factor','bison.py',79),
-  ('factor -> NUMBER','factor',1,'p_factor_num','bison.py',83),
-  ('factor -> ( expression )','factor',3,'p_factor_expr','bison.py',87),
+  ('function -> func ( ) { }','function',5,'p_function','bison.py',13),
+  ('function -> func ( ) { stmtlist }','function',6,'p_function','bison.py',14),
+  ('func -> MAIN','func',1,'p_main','bison.py',18),
+  ('function -> stmtlist','function',1,'p_fnc_stmt','bison.py',22),
+  ('stmtlist -> stmtlist stmt2 ;','stmtlist',3,'p_stmtlist','bison.py',25),
+  ('stmtlist -> stmt2 ;','stmtlist',2,'p_stmtlist','bison.py',26),
+  ('stmt2 -> stmt','stmt2',1,'p_stmt2','bison.py',30),
+  ('stmt -> expression','stmt',1,'p_stmt','bison.py',35),
+  ('stmt -> type ID = expression','stmt',4,'p_declare','bison.py',39),
+  ('stmt -> type ID','stmt',2,'p_declare','bison.py',40),
+  ('type -> BOOL','type',1,'p_type','bison.py',47),
+  ('type -> CHAR','type',1,'p_type','bison.py',48),
+  ('type -> BYTE','type',1,'p_type','bison.py',49),
+  ('type -> SHORT','type',1,'p_type','bison.py',50),
+  ('type -> INT','type',1,'p_type','bison.py',51),
+  ('type -> LONG','type',1,'p_type','bison.py',52),
+  ('type -> DOUBLE','type',1,'p_type','bison.py',53),
+  ('type -> FLOAT','type',1,'p_type','bison.py',54),
+  ('stmt -> ID = expression','stmt',3,'p_assign','bison.py',60),
+  ('expression -> expression PLUS term','expression',3,'p_binary_operators','bison.py',69),
+  ('expression -> expression MINUS term','expression',3,'p_binary_operators','bison.py',70),
+  ('term -> term TIMES factor','term',3,'p_binary_operators','bison.py',71),
+  ('term -> term DIVIDE factor','term',3,'p_binary_operators','bison.py',72),
+  ('expression -> term','expression',1,'p_expression_term','bison.py',78),
+  ('term -> factor','term',1,'p_term_factor','bison.py',82),
+  ('factor -> NUMBER','factor',1,'p_factor_num','bison.py',86),
+  ('factor -> ( expression )','factor',3,'p_factor_expr','bison.py',90),
 ]
