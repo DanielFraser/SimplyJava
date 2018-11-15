@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = "BOOL BYTE CHAR CLASS COMMENT DIVIDE DOUBLE ELSE FLOAT ID IF INT LONG MAIN MINUS NEWLINE NUMBER PLUS PRIVATE PROTECTED PUBLIC SHORT THEN TIMES WHILEfunction : func '(' ')' '{' '}'\n                | func '(' ')' '{' stmtlist '}' func : MAINfunction : stmtliststmtlist : stmtlist stmt2 ';'\n            | stmt2 ';' stmt2 : stmtstmt : expressionstmt : type ID '=' expression\n            | type ID type : BOOL\n            | CHAR\n            | BYTE\n            | SHORT\n            | INT\n            | LONG\n            | DOUBLE\n            | FLOAT stmt : ID '=' expression expression : expression PLUS term\n                  | expression MINUS term\n       term       : term TIMES factor\n                  | term DIVIDE factorexpression : termterm : factorfactor : NUMBERfactor : '(' expression ')' "
+_lr_signature = "BOOL BYTE CHAR CLASS COMMENT DIVIDE DOUBLE ELSE FLOAT ID IF INT LONG MAIN MINUS NEWLINE NUMBER PLUS PRIVATE PROTECTED PUBLIC SHORT STATIC SWITCH THEN TIMES WHILEmainclass : classlist classlist : classlist class\n            | class class : acs CLASS classname '{' stmtlist '}'  classname : ID  acs : PRIVATE\n            | PUBLIC\n            | PROTECTED\n            | static : STATIC\n                | stmtlist : stmtlist stmt ';'\n            | stmt ';' stmt : ifstmt\n            | loopstmt\n            | switchstmt\n            | assignstmt\n            | function\n            | modifystmt function : func '(' args ')' '{' methodstmt '}'  methodstmt : IF BOOLargs : args ',' type ID\n            | type ID\n            | func : MAIN\n            | acs static rettype ID rettype : type assignstmt : type ID '=' expression\n            | type ID type : BOOL\n            | CHAR\n            | BYTE\n            | SHORT\n            | INT\n            | LONG\n            | DOUBLE\n            | FLOAT\n            | ID modifystmt : ID '=' expression expression : expression PLUS term\n                 | expression MINUS term\n      term       : term TIMES factor\n                 | term DIVIDE factorexpression : termterm : factorfactor : NUMBERfactor : '(' expression ')' ifstmt : IFloopstmt : WHILEswitchstmt : SWITCH"
     
-_lr_action_items = {'MAIN':([0,],[5,]),'ID':([0,4,9,12,13,14,15,16,17,18,19,25,34,41,44,],[10,10,28,-11,-12,-13,-14,-15,-16,-17,-18,-6,-5,10,10,]),'BOOL':([0,4,25,34,41,44,],[12,12,-6,-5,12,12,]),'CHAR':([0,4,25,34,41,44,],[13,13,-6,-5,13,13,]),'BYTE':([0,4,25,34,41,44,],[14,14,-6,-5,14,14,]),'SHORT':([0,4,25,34,41,44,],[15,15,-6,-5,15,15,]),'INT':([0,4,25,34,41,44,],[16,16,-6,-5,16,16,]),'LONG':([0,4,25,34,41,44,],[17,17,-6,-5,17,17,]),'DOUBLE':([0,4,25,34,41,44,],[18,18,-6,-5,18,18,]),'FLOAT':([0,4,25,34,41,44,],[19,19,-6,-5,19,19,]),'NUMBER':([0,3,4,25,26,27,29,30,31,34,37,41,44,],[21,21,21,-6,21,21,21,21,21,-5,21,21,21,]),'(':([0,2,3,4,5,25,26,27,29,30,31,34,37,41,44,],[3,22,3,3,-3,-6,3,3,3,3,3,-5,3,3,3,]),'$end':([1,4,25,34,43,45,],[0,-4,-6,-5,-1,-2,]),';':([6,7,8,11,20,21,24,28,33,35,36,38,39,40,42,],[25,-7,-8,-24,-25,-26,34,-10,-27,-20,-21,-19,-22,-23,-9,]),'PLUS':([8,11,20,21,23,33,35,36,38,39,40,42,],[26,-24,-25,-26,26,-27,-20,-21,26,-22,-23,26,]),'MINUS':([8,11,20,21,23,33,35,36,38,39,40,42,],[27,-24,-25,-26,27,-27,-20,-21,27,-22,-23,27,]),'=':([10,28,],[29,37,]),')':([11,20,21,22,23,33,35,36,39,40,],[-24,-25,-26,32,33,-27,-20,-21,-22,-23,]),'TIMES':([11,20,21,33,35,36,39,40,],[30,-25,-26,-27,30,30,-22,-23,]),'DIVIDE':([11,20,21,33,35,36,39,40,],[31,-25,-26,-27,31,31,-22,-23,]),'}':([25,34,41,44,],[-6,-5,43,45,]),'{':([32,],[41,]),}
+_lr_action_items = {'PRIVATE':([0,2,3,8,12,14,39,41,48,],[5,5,-3,-2,5,5,-4,-13,-12,]),'PUBLIC':([0,2,3,8,12,14,39,41,48,],[6,6,-3,-2,6,6,-4,-13,-12,]),'PROTECTED':([0,2,3,8,12,14,39,41,48,],[7,7,-3,-2,7,7,-4,-13,-12,]),'CLASS':([0,2,3,4,5,6,7,8,39,],[-9,-9,-3,9,-6,-7,-8,-2,-4,]),'$end':([1,2,3,8,39,],[0,-1,-3,-2,-4,]),'STATIC':([5,6,7,12,13,14,41,48,],[-6,-7,-8,-9,38,-9,-13,-12,]),'BOOL':([5,6,7,12,13,14,37,38,41,44,48,65,75,],[-6,-7,-8,28,-11,28,28,-10,-13,28,-12,28,78,]),'CHAR':([5,6,7,12,13,14,37,38,41,44,48,65,],[-6,-7,-8,29,-11,29,29,-10,-13,29,-12,29,]),'BYTE':([5,6,7,12,13,14,37,38,41,44,48,65,],[-6,-7,-8,30,-11,30,30,-10,-13,30,-12,30,]),'SHORT':([5,6,7,12,13,14,37,38,41,44,48,65,],[-6,-7,-8,31,-11,31,31,-10,-13,31,-12,31,]),'INT':([5,6,7,12,13,14,37,38,41,44,48,65,],[-6,-7,-8,32,-11,32,32,-10,-13,32,-12,32,]),'LONG':([5,6,7,12,13,14,37,38,41,44,48,65,],[-6,-7,-8,33,-11,33,33,-10,-13,33,-12,33,]),'DOUBLE':([5,6,7,12,13,14,37,38,41,44,48,65,],[-6,-7,-8,34,-11,34,34,-10,-13,34,-12,34,]),'FLOAT':([5,6,7,12,13,14,37,38,41,44,48,65,],[-6,-7,-8,35,-11,35,35,-10,-13,35,-12,35,]),'ID':([5,6,7,9,12,13,14,25,26,28,29,30,31,32,33,34,35,37,38,41,44,45,46,47,48,56,65,73,],[-6,-7,-8,11,26,-11,26,42,-38,-30,-31,-32,-33,-34,-35,-36,-37,46,-10,-13,46,57,-38,-27,-12,66,46,76,]),'{':([10,11,64,],[12,-5,72,]),'IF':([12,14,41,48,72,],[22,22,-13,-12,75,]),'WHILE':([12,14,41,48,],[23,23,-13,-12,]),'SWITCH':([12,14,41,48,],[24,24,-13,-12,]),'MAIN':([12,14,41,48,],[36,36,-13,-12,]),'}':([14,41,48,74,78,],[39,-13,-12,77,-21,]),';':([15,16,17,18,19,20,21,22,23,24,40,42,50,51,52,53,58,67,68,69,70,71,77,],[41,-14,-15,-16,-17,-18,-19,-48,-49,-50,48,-29,-39,-44,-45,-46,-28,-40,-41,-42,-43,-47,-20,]),'=':([26,42,],[43,49,]),'(':([27,36,43,49,54,57,59,60,61,62,],[44,-25,54,54,54,-26,54,54,54,54,]),'NUMBER':([43,49,54,59,60,61,62,],[53,53,53,53,53,53,53,]),')':([44,51,52,53,55,63,66,67,68,69,70,71,76,],[-24,-44,-45,-46,64,71,-23,-40,-41,-42,-43,-47,-22,]),',':([44,55,66,76,],[-24,65,-23,-22,]),'PLUS':([50,51,52,53,58,63,67,68,69,70,71,],[59,-44,-45,-46,59,59,-40,-41,-42,-43,-47,]),'MINUS':([50,51,52,53,58,63,67,68,69,70,71,],[60,-44,-45,-46,60,60,-40,-41,-42,-43,-47,]),'TIMES':([51,52,53,67,68,69,70,71,],[61,-45,-46,61,61,-42,-43,-47,]),'DIVIDE':([51,52,53,67,68,69,70,71,],[62,-45,-46,62,62,-42,-43,-47,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'function':([0,],[1,]),'func':([0,],[2,]),'stmtlist':([0,41,],[4,44,]),'stmt2':([0,4,41,44,],[6,24,6,24,]),'stmt':([0,4,41,44,],[7,7,7,7,]),'expression':([0,3,4,29,37,41,44,],[8,23,8,38,42,8,8,]),'type':([0,4,41,44,],[9,9,9,9,]),'term':([0,3,4,26,27,29,37,41,44,],[11,11,11,35,36,11,11,11,11,]),'factor':([0,3,4,26,27,29,30,31,37,41,44,],[20,20,20,20,20,20,39,40,20,20,20,]),}
+_lr_goto_items = {'mainclass':([0,],[1,]),'classlist':([0,],[2,]),'class':([0,2,],[3,8,]),'acs':([0,2,12,14,],[4,4,13,13,]),'classname':([9,],[10,]),'stmtlist':([12,],[14,]),'stmt':([12,14,],[15,40,]),'ifstmt':([12,14,],[16,16,]),'loopstmt':([12,14,],[17,17,]),'switchstmt':([12,14,],[18,18,]),'assignstmt':([12,14,],[19,19,]),'function':([12,14,],[20,20,]),'modifystmt':([12,14,],[21,21,]),'type':([12,14,37,44,65,],[25,25,47,56,73,]),'func':([12,14,],[27,27,]),'static':([13,],[37,]),'rettype':([37,],[45,]),'expression':([43,49,54,],[50,58,63,]),'term':([43,49,54,59,60,],[51,51,51,67,68,]),'factor':([43,49,54,59,60,61,62,],[52,52,52,52,52,69,70,]),'args':([44,],[55,]),'methodstmt':([72,],[74,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,32 +26,55 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> function","S'",1,None,None,None),
-  ('function -> func ( ) { }','function',5,'p_function','bison.py',13),
-  ('function -> func ( ) { stmtlist }','function',6,'p_function','bison.py',14),
-  ('func -> MAIN','func',1,'p_main','bison.py',18),
-  ('function -> stmtlist','function',1,'p_fnc_stmt','bison.py',22),
-  ('stmtlist -> stmtlist stmt2 ;','stmtlist',3,'p_stmtlist','bison.py',25),
-  ('stmtlist -> stmt2 ;','stmtlist',2,'p_stmtlist','bison.py',26),
-  ('stmt2 -> stmt','stmt2',1,'p_stmt2','bison.py',30),
-  ('stmt -> expression','stmt',1,'p_stmt','bison.py',35),
-  ('stmt -> type ID = expression','stmt',4,'p_declare','bison.py',39),
-  ('stmt -> type ID','stmt',2,'p_declare','bison.py',40),
-  ('type -> BOOL','type',1,'p_type','bison.py',47),
-  ('type -> CHAR','type',1,'p_type','bison.py',48),
-  ('type -> BYTE','type',1,'p_type','bison.py',49),
-  ('type -> SHORT','type',1,'p_type','bison.py',50),
-  ('type -> INT','type',1,'p_type','bison.py',51),
-  ('type -> LONG','type',1,'p_type','bison.py',52),
-  ('type -> DOUBLE','type',1,'p_type','bison.py',53),
-  ('type -> FLOAT','type',1,'p_type','bison.py',54),
-  ('stmt -> ID = expression','stmt',3,'p_assign','bison.py',60),
-  ('expression -> expression PLUS term','expression',3,'p_binary_operators','bison.py',69),
-  ('expression -> expression MINUS term','expression',3,'p_binary_operators','bison.py',70),
-  ('term -> term TIMES factor','term',3,'p_binary_operators','bison.py',71),
-  ('term -> term DIVIDE factor','term',3,'p_binary_operators','bison.py',72),
-  ('expression -> term','expression',1,'p_expression_term','bison.py',78),
-  ('term -> factor','term',1,'p_term_factor','bison.py',82),
-  ('factor -> NUMBER','factor',1,'p_factor_num','bison.py',86),
-  ('factor -> ( expression )','factor',3,'p_factor_expr','bison.py',90),
+  ("S' -> mainclass","S'",1,None,None,None),
+  ('mainclass -> classlist','mainclass',1,'p_mainclass','bison.py',10),
+  ('classlist -> classlist class','classlist',2,'p_classlist','bison.py',14),
+  ('classlist -> class','classlist',1,'p_classlist','bison.py',15),
+  ('class -> acs CLASS classname { stmtlist }','class',6,'p_class','bison.py',19),
+  ('classname -> ID','classname',1,'p_classname','bison.py',23),
+  ('acs -> PRIVATE','acs',1,'p_acs','bison.py',28),
+  ('acs -> PUBLIC','acs',1,'p_acs','bison.py',29),
+  ('acs -> PROTECTED','acs',1,'p_acs','bison.py',30),
+  ('acs -> <empty>','acs',0,'p_acs','bison.py',31),
+  ('static -> STATIC','static',1,'p_static','bison.py',36),
+  ('static -> <empty>','static',0,'p_static','bison.py',37),
+  ('stmtlist -> stmtlist stmt ;','stmtlist',3,'p_stmtlist','bison.py',41),
+  ('stmtlist -> stmt ;','stmtlist',2,'p_stmtlist','bison.py',42),
+  ('stmt -> ifstmt','stmt',1,'p_stmt','bison.py',46),
+  ('stmt -> loopstmt','stmt',1,'p_stmt','bison.py',47),
+  ('stmt -> switchstmt','stmt',1,'p_stmt','bison.py',48),
+  ('stmt -> assignstmt','stmt',1,'p_stmt','bison.py',49),
+  ('stmt -> function','stmt',1,'p_stmt','bison.py',50),
+  ('stmt -> modifystmt','stmt',1,'p_stmt','bison.py',51),
+  ('function -> func ( args ) { methodstmt }','function',7,'p_function','bison.py',56),
+  ('methodstmt -> IF BOOL','methodstmt',2,'p_methodstmts','bison.py',61),
+  ('args -> args , type ID','args',4,'p_args','bison.py',65),
+  ('args -> type ID','args',2,'p_args','bison.py',66),
+  ('args -> <empty>','args',0,'p_args','bison.py',67),
+  ('func -> MAIN','func',1,'p_main','bison.py',71),
+  ('func -> acs static rettype ID','func',4,'p_main','bison.py',72),
+  ('rettype -> type','rettype',1,'p_rettype','bison.py',80),
+  ('assignstmt -> type ID = expression','assignstmt',4,'p_declare','bison.py',84),
+  ('assignstmt -> type ID','assignstmt',2,'p_declare','bison.py',85),
+  ('type -> BOOL','type',1,'p_type','bison.py',93),
+  ('type -> CHAR','type',1,'p_type','bison.py',94),
+  ('type -> BYTE','type',1,'p_type','bison.py',95),
+  ('type -> SHORT','type',1,'p_type','bison.py',96),
+  ('type -> INT','type',1,'p_type','bison.py',97),
+  ('type -> LONG','type',1,'p_type','bison.py',98),
+  ('type -> DOUBLE','type',1,'p_type','bison.py',99),
+  ('type -> FLOAT','type',1,'p_type','bison.py',100),
+  ('type -> ID','type',1,'p_type','bison.py',101),
+  ('modifystmt -> ID = expression','modifystmt',3,'p_modify','bison.py',108),
+  ('expression -> expression PLUS term','expression',3,'p_binary_operators','bison.py',117),
+  ('expression -> expression MINUS term','expression',3,'p_binary_operators','bison.py',118),
+  ('term -> term TIMES factor','term',3,'p_binary_operators','bison.py',119),
+  ('term -> term DIVIDE factor','term',3,'p_binary_operators','bison.py',120),
+  ('expression -> term','expression',1,'p_expression_term','bison.py',126),
+  ('term -> factor','term',1,'p_term_factor','bison.py',131),
+  ('factor -> NUMBER','factor',1,'p_factor_num','bison.py',136),
+  ('factor -> ( expression )','factor',3,'p_factor_expr','bison.py',141),
+  ('ifstmt -> IF','ifstmt',1,'p_if','bison.py',146),
+  ('loopstmt -> WHILE','loopstmt',1,'p_loop','bison.py',150),
+  ('switchstmt -> SWITCH','switchstmt',1,'p_switch','bison.py',154),
 ]

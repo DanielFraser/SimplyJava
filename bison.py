@@ -6,10 +6,17 @@ from FileHandler import addToFile
 from utility import findVar, addVar, convert, isType, addclass
 
 
+def p_mainclass(p):
+    '''mainclass : classlist '''
+
+
+def p_classlist(p):
+    '''classlist : classlist class
+            | class '''
+
+
 def p_class(p):
-    '''class : CLASS acs classname '{' fnclist '}' '''
-
-
+    '''class : acs CLASS classname '{' stmtlist '}' '''
 
 
 def p_classname(p):
@@ -20,42 +27,44 @@ def p_classname(p):
 def p_acs(p):
     ''' acs : PRIVATE
             | PUBLIC
-            | PROTECTED '''
+            | PROTECTED
+            | '''
     addToFile(text=convert(p[1]) + " ")
 
 
-def p_funclst(p):
-    '''fnclist : fnclist function
-                | function '''
+def p_static(p):
+    '''static : STATIC
+                | '''
 
 
 def p_stmtlist(p):
     '''stmtlist : stmtlist stmt ';'
-            | stmt ';'
-            | '''
+            | stmt ';' '''
 
 
 def p_stmt(p):
     '''stmt : ifstmt
-            | loopstnt
+            | loopstmt
             | switchstmt
-            | assignstmt'''
+            | assignstmt
+            | function
+            | modifystmt '''
     p[0] = p[1]
 
 
 def p_function(p):
-    '''function : func '(' arglist ')' '{' stmtlist '}' '''
+    '''function : func '(' args ')' '{' methodstmt '}' '''
     addToFile(text="}")
 
 
-def p_arglist(p):
-    '''arglist : args
-                | '''
+def p_methodstmts(p):
+    ''' methodstmt : IF BOOL'''
 
 
 def p_args(p):
     '''args : args ',' type ID
-            | type ID'''
+            | type ID
+            | '''
 
 
 def p_main(p):
@@ -72,7 +81,7 @@ def p_rettype(p):
 
 
 def p_declare(p):
-    '''stmt : type ID '=' expression
+    '''assignstmt : type ID '=' expression
             | type ID '''
     if addVar(p[2]):
         p[0] = ' '.join(str(e) for e in p[1:])
@@ -95,8 +104,8 @@ def p_type(p):
     p[0] = convert(p[1])
 
 
-def p_assign(p):
-    '''stmt : ID '=' expression '''
+def p_modify(p):
+    '''modifystmt : ID '=' expression '''
     if findVar(p[1]):
         p[0] = ' '.join(str(e) for e in p[1:])
     else:
@@ -131,6 +140,18 @@ def p_factor_num(p):
 def p_factor_expr(p):
     '''factor : '(' expression ')' '''
     p[0] = p[2]
+
+
+def p_if(p):
+    'ifstmt : IF'
+
+
+def p_loop(p):
+    'loopstmt : WHILE'
+
+
+def p_switch(p):
+    'switchstmt : SWITCH'
 
 
 # Error rule for syntax errors

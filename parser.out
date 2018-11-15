@@ -4,113 +4,1164 @@ Unused terminals:
 
     COMMENT
     ELSE
-    IF
     NEWLINE
     THEN
-    WHILE
 
 Grammar
 
-Rule 0     S' -> class
-Rule 1     class -> CLASS acs classname { fnclist }
-Rule 2     classname -> ID
-Rule 3     acs -> PRIVATE
-Rule 4     acs -> PUBLIC
-Rule 5     acs -> PROTECTED
-Rule 6     fnclist -> fnclist function
-Rule 7     fnclist -> function
-Rule 8     stmtlist -> stmtlist stmt ;
-Rule 9     stmtlist -> stmt ;
-Rule 10    stmtlist -> <empty>
-Rule 11    stmt -> ifstmt
-Rule 12    stmt -> loopstnt
-Rule 13    stmt -> switchstmt
-Rule 14    stmt -> assignstmt
-Rule 15    function -> func ( arglist ) { stmtlist }
-Rule 16    arglist -> args
-Rule 17    arglist -> <empty>
-Rule 18    args -> args , type ID
-Rule 19    args -> type ID
-Rule 20    func -> MAIN
-Rule 21    func -> acs static rettype ID
-Rule 22    rettype -> type
-Rule 23    stmt -> type ID = expression
-Rule 24    stmt -> type ID
-Rule 25    type -> BOOL
-Rule 26    type -> CHAR
-Rule 27    type -> BYTE
-Rule 28    type -> SHORT
-Rule 29    type -> INT
-Rule 30    type -> LONG
-Rule 31    type -> DOUBLE
-Rule 32    type -> FLOAT
-Rule 33    type -> ID
-Rule 34    stmt -> ID = expression
-Rule 35    expression -> expression PLUS term
-Rule 36    expression -> expression MINUS term
-Rule 37    term -> term TIMES factor
-Rule 38    term -> term DIVIDE factor
-Rule 39    expression -> term
-Rule 40    term -> factor
-Rule 41    factor -> NUMBER
-Rule 42    factor -> ( expression )
+Rule 0     S' -> mainclass
+Rule 1     mainclass -> classlist
+Rule 2     classlist -> classlist class
+Rule 3     classlist -> class
+Rule 4     class -> acs CLASS classname { stmtlist }
+Rule 5     classname -> ID
+Rule 6     acs -> PRIVATE
+Rule 7     acs -> PUBLIC
+Rule 8     acs -> PROTECTED
+Rule 9     acs -> <empty>
+Rule 10    static -> STATIC
+Rule 11    static -> <empty>
+Rule 12    stmtlist -> stmtlist stmt ;
+Rule 13    stmtlist -> stmt ;
+Rule 14    stmt -> ifstmt
+Rule 15    stmt -> loopstmt
+Rule 16    stmt -> switchstmt
+Rule 17    stmt -> assignstmt
+Rule 18    stmt -> function
+Rule 19    stmt -> modifystmt
+Rule 20    function -> func ( args ) { methodstmt }
+Rule 21    methodstmt -> IF BOOL
+Rule 22    args -> args , type ID
+Rule 23    args -> type ID
+Rule 24    args -> <empty>
+Rule 25    func -> MAIN
+Rule 26    func -> acs static rettype ID
+Rule 27    rettype -> type
+Rule 28    assignstmt -> type ID = expression
+Rule 29    assignstmt -> type ID
+Rule 30    type -> BOOL
+Rule 31    type -> CHAR
+Rule 32    type -> BYTE
+Rule 33    type -> SHORT
+Rule 34    type -> INT
+Rule 35    type -> LONG
+Rule 36    type -> DOUBLE
+Rule 37    type -> FLOAT
+Rule 38    type -> ID
+Rule 39    modifystmt -> ID = expression
+Rule 40    expression -> expression PLUS term
+Rule 41    expression -> expression MINUS term
+Rule 42    term -> term TIMES factor
+Rule 43    term -> term DIVIDE factor
+Rule 44    expression -> term
+Rule 45    term -> factor
+Rule 46    factor -> NUMBER
+Rule 47    factor -> ( expression )
+Rule 48    ifstmt -> IF
+Rule 49    loopstmt -> WHILE
+Rule 50    switchstmt -> SWITCH
 
 Terminals, with rules where they appear
 
-(                    : 15 42
-)                    : 15 42
-,                    : 18
-;                    : 8 9
-=                    : 23 34
-BOOL                 : 25
-BYTE                 : 27
-CHAR                 : 26
-CLASS                : 1
+(                    : 20 47
+)                    : 20 47
+,                    : 22
+;                    : 12 13
+=                    : 28 39
+BOOL                 : 21 30
+BYTE                 : 32
+CHAR                 : 31
+CLASS                : 4
 COMMENT              : 
-DIVIDE               : 38
-DOUBLE               : 31
+DIVIDE               : 43
+DOUBLE               : 36
 ELSE                 : 
-FLOAT                : 32
-ID                   : 2 18 19 21 23 24 33 34
-IF                   : 
-INT                  : 29
-LONG                 : 30
-MAIN                 : 20
-MINUS                : 36
+FLOAT                : 37
+ID                   : 5 22 23 26 28 29 38 39
+IF                   : 21 48
+INT                  : 34
+LONG                 : 35
+MAIN                 : 25
+MINUS                : 41
 NEWLINE              : 
-NUMBER               : 41
-PLUS                 : 35
-PRIVATE              : 3
-PROTECTED            : 5
-PUBLIC               : 4
-SHORT                : 28
+NUMBER               : 46
+PLUS                 : 40
+PRIVATE              : 6
+PROTECTED            : 8
+PUBLIC               : 7
+SHORT                : 33
+STATIC               : 10
+SWITCH               : 50
 THEN                 : 
-TIMES                : 37
-WHILE                : 
+TIMES                : 42
+WHILE                : 49
 error                : 
-{                    : 1 15
-}                    : 1 15
+{                    : 4 20
+}                    : 4 20
 
 Nonterminals, with rules where they appear
 
-acs                  : 1 21
-arglist              : 15
-args                 : 16 18
-assignstmt           : 14
-class                : 0
-classname            : 1
-expression           : 23 34 35 36 42
-factor               : 37 38 40
-fnclist              : 1 6
-func                 : 15
-function             : 6 7
-ifstmt               : 11
-loopstnt             : 12
-rettype              : 21
-static               : 21
-stmt                 : 8 9
-stmtlist             : 8 15
-switchstmt           : 13
-term                 : 35 36 37 38 39
-type                 : 18 19 22 23 24
+acs                  : 4 26
+args                 : 20 22
+assignstmt           : 17
+class                : 2 3
+classlist            : 1 2
+classname            : 4
+expression           : 28 39 40 41 47
+factor               : 42 43 45
+func                 : 20
+function             : 18
+ifstmt               : 14
+loopstmt             : 15
+mainclass            : 0
+methodstmt           : 20
+modifystmt           : 19
+rettype              : 26
+static               : 26
+stmt                 : 12 13
+stmtlist             : 4 12
+switchstmt           : 16
+term                 : 40 41 42 43 44
+type                 : 22 23 27 28 29
 
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . mainclass
+    (1) mainclass -> . classlist
+    (2) classlist -> . classlist class
+    (3) classlist -> . class
+    (4) class -> . acs CLASS classname { stmtlist }
+    (6) acs -> . PRIVATE
+    (7) acs -> . PUBLIC
+    (8) acs -> . PROTECTED
+    (9) acs -> .
+
+    PRIVATE         shift and go to state 5
+    PUBLIC          shift and go to state 6
+    PROTECTED       shift and go to state 7
+    CLASS           reduce using rule 9 (acs -> .)
+
+    mainclass                      shift and go to state 1
+    classlist                      shift and go to state 2
+    class                          shift and go to state 3
+    acs                            shift and go to state 4
+
+state 1
+
+    (0) S' -> mainclass .
+
+
+
+state 2
+
+    (1) mainclass -> classlist .
+    (2) classlist -> classlist . class
+    (4) class -> . acs CLASS classname { stmtlist }
+    (6) acs -> . PRIVATE
+    (7) acs -> . PUBLIC
+    (8) acs -> . PROTECTED
+    (9) acs -> .
+
+    $end            reduce using rule 1 (mainclass -> classlist .)
+    PRIVATE         shift and go to state 5
+    PUBLIC          shift and go to state 6
+    PROTECTED       shift and go to state 7
+    CLASS           reduce using rule 9 (acs -> .)
+
+    class                          shift and go to state 8
+    acs                            shift and go to state 4
+
+state 3
+
+    (3) classlist -> class .
+
+    PRIVATE         reduce using rule 3 (classlist -> class .)
+    PUBLIC          reduce using rule 3 (classlist -> class .)
+    PROTECTED       reduce using rule 3 (classlist -> class .)
+    CLASS           reduce using rule 3 (classlist -> class .)
+    $end            reduce using rule 3 (classlist -> class .)
+
+
+state 4
+
+    (4) class -> acs . CLASS classname { stmtlist }
+
+    CLASS           shift and go to state 9
+
+
+state 5
+
+    (6) acs -> PRIVATE .
+
+    CLASS           reduce using rule 6 (acs -> PRIVATE .)
+    STATIC          reduce using rule 6 (acs -> PRIVATE .)
+    BOOL            reduce using rule 6 (acs -> PRIVATE .)
+    CHAR            reduce using rule 6 (acs -> PRIVATE .)
+    BYTE            reduce using rule 6 (acs -> PRIVATE .)
+    SHORT           reduce using rule 6 (acs -> PRIVATE .)
+    INT             reduce using rule 6 (acs -> PRIVATE .)
+    LONG            reduce using rule 6 (acs -> PRIVATE .)
+    DOUBLE          reduce using rule 6 (acs -> PRIVATE .)
+    FLOAT           reduce using rule 6 (acs -> PRIVATE .)
+    ID              reduce using rule 6 (acs -> PRIVATE .)
+
+
+state 6
+
+    (7) acs -> PUBLIC .
+
+    CLASS           reduce using rule 7 (acs -> PUBLIC .)
+    STATIC          reduce using rule 7 (acs -> PUBLIC .)
+    BOOL            reduce using rule 7 (acs -> PUBLIC .)
+    CHAR            reduce using rule 7 (acs -> PUBLIC .)
+    BYTE            reduce using rule 7 (acs -> PUBLIC .)
+    SHORT           reduce using rule 7 (acs -> PUBLIC .)
+    INT             reduce using rule 7 (acs -> PUBLIC .)
+    LONG            reduce using rule 7 (acs -> PUBLIC .)
+    DOUBLE          reduce using rule 7 (acs -> PUBLIC .)
+    FLOAT           reduce using rule 7 (acs -> PUBLIC .)
+    ID              reduce using rule 7 (acs -> PUBLIC .)
+
+
+state 7
+
+    (8) acs -> PROTECTED .
+
+    CLASS           reduce using rule 8 (acs -> PROTECTED .)
+    STATIC          reduce using rule 8 (acs -> PROTECTED .)
+    BOOL            reduce using rule 8 (acs -> PROTECTED .)
+    CHAR            reduce using rule 8 (acs -> PROTECTED .)
+    BYTE            reduce using rule 8 (acs -> PROTECTED .)
+    SHORT           reduce using rule 8 (acs -> PROTECTED .)
+    INT             reduce using rule 8 (acs -> PROTECTED .)
+    LONG            reduce using rule 8 (acs -> PROTECTED .)
+    DOUBLE          reduce using rule 8 (acs -> PROTECTED .)
+    FLOAT           reduce using rule 8 (acs -> PROTECTED .)
+    ID              reduce using rule 8 (acs -> PROTECTED .)
+
+
+state 8
+
+    (2) classlist -> classlist class .
+
+    PRIVATE         reduce using rule 2 (classlist -> classlist class .)
+    PUBLIC          reduce using rule 2 (classlist -> classlist class .)
+    PROTECTED       reduce using rule 2 (classlist -> classlist class .)
+    CLASS           reduce using rule 2 (classlist -> classlist class .)
+    $end            reduce using rule 2 (classlist -> classlist class .)
+
+
+state 9
+
+    (4) class -> acs CLASS . classname { stmtlist }
+    (5) classname -> . ID
+
+    ID              shift and go to state 11
+
+    classname                      shift and go to state 10
+
+state 10
+
+    (4) class -> acs CLASS classname . { stmtlist }
+
+    {               shift and go to state 12
+
+
+state 11
+
+    (5) classname -> ID .
+
+    {               reduce using rule 5 (classname -> ID .)
+
+
+state 12
+
+    (4) class -> acs CLASS classname { . stmtlist }
+    (12) stmtlist -> . stmtlist stmt ;
+    (13) stmtlist -> . stmt ;
+    (14) stmt -> . ifstmt
+    (15) stmt -> . loopstmt
+    (16) stmt -> . switchstmt
+    (17) stmt -> . assignstmt
+    (18) stmt -> . function
+    (19) stmt -> . modifystmt
+    (48) ifstmt -> . IF
+    (49) loopstmt -> . WHILE
+    (50) switchstmt -> . SWITCH
+    (28) assignstmt -> . type ID = expression
+    (29) assignstmt -> . type ID
+    (20) function -> . func ( args ) { methodstmt }
+    (39) modifystmt -> . ID = expression
+    (30) type -> . BOOL
+    (31) type -> . CHAR
+    (32) type -> . BYTE
+    (33) type -> . SHORT
+    (34) type -> . INT
+    (35) type -> . LONG
+    (36) type -> . DOUBLE
+    (37) type -> . FLOAT
+    (38) type -> . ID
+    (25) func -> . MAIN
+    (26) func -> . acs static rettype ID
+    (6) acs -> . PRIVATE
+    (7) acs -> . PUBLIC
+    (8) acs -> . PROTECTED
+    (9) acs -> .
+
+  ! shift/reduce conflict for BOOL resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for BYTE resolved as shift
+  ! shift/reduce conflict for SHORT resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for LONG resolved as shift
+  ! shift/reduce conflict for DOUBLE resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    IF              shift and go to state 22
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    ID              shift and go to state 26
+    BOOL            shift and go to state 28
+    CHAR            shift and go to state 29
+    BYTE            shift and go to state 30
+    SHORT           shift and go to state 31
+    INT             shift and go to state 32
+    LONG            shift and go to state 33
+    DOUBLE          shift and go to state 34
+    FLOAT           shift and go to state 35
+    MAIN            shift and go to state 36
+    PRIVATE         shift and go to state 5
+    PUBLIC          shift and go to state 6
+    PROTECTED       shift and go to state 7
+    STATIC          reduce using rule 9 (acs -> .)
+
+  ! BOOL            [ reduce using rule 9 (acs -> .) ]
+  ! CHAR            [ reduce using rule 9 (acs -> .) ]
+  ! BYTE            [ reduce using rule 9 (acs -> .) ]
+  ! SHORT           [ reduce using rule 9 (acs -> .) ]
+  ! INT             [ reduce using rule 9 (acs -> .) ]
+  ! LONG            [ reduce using rule 9 (acs -> .) ]
+  ! DOUBLE          [ reduce using rule 9 (acs -> .) ]
+  ! FLOAT           [ reduce using rule 9 (acs -> .) ]
+  ! ID              [ reduce using rule 9 (acs -> .) ]
+
+    acs                            shift and go to state 13
+    stmtlist                       shift and go to state 14
+    stmt                           shift and go to state 15
+    ifstmt                         shift and go to state 16
+    loopstmt                       shift and go to state 17
+    switchstmt                     shift and go to state 18
+    assignstmt                     shift and go to state 19
+    function                       shift and go to state 20
+    modifystmt                     shift and go to state 21
+    type                           shift and go to state 25
+    func                           shift and go to state 27
+
+state 13
+
+    (26) func -> acs . static rettype ID
+    (10) static -> . STATIC
+    (11) static -> .
+
+    STATIC          shift and go to state 38
+    BOOL            reduce using rule 11 (static -> .)
+    CHAR            reduce using rule 11 (static -> .)
+    BYTE            reduce using rule 11 (static -> .)
+    SHORT           reduce using rule 11 (static -> .)
+    INT             reduce using rule 11 (static -> .)
+    LONG            reduce using rule 11 (static -> .)
+    DOUBLE          reduce using rule 11 (static -> .)
+    FLOAT           reduce using rule 11 (static -> .)
+    ID              reduce using rule 11 (static -> .)
+
+    static                         shift and go to state 37
+
+state 14
+
+    (4) class -> acs CLASS classname { stmtlist . }
+    (12) stmtlist -> stmtlist . stmt ;
+    (14) stmt -> . ifstmt
+    (15) stmt -> . loopstmt
+    (16) stmt -> . switchstmt
+    (17) stmt -> . assignstmt
+    (18) stmt -> . function
+    (19) stmt -> . modifystmt
+    (48) ifstmt -> . IF
+    (49) loopstmt -> . WHILE
+    (50) switchstmt -> . SWITCH
+    (28) assignstmt -> . type ID = expression
+    (29) assignstmt -> . type ID
+    (20) function -> . func ( args ) { methodstmt }
+    (39) modifystmt -> . ID = expression
+    (30) type -> . BOOL
+    (31) type -> . CHAR
+    (32) type -> . BYTE
+    (33) type -> . SHORT
+    (34) type -> . INT
+    (35) type -> . LONG
+    (36) type -> . DOUBLE
+    (37) type -> . FLOAT
+    (38) type -> . ID
+    (25) func -> . MAIN
+    (26) func -> . acs static rettype ID
+    (6) acs -> . PRIVATE
+    (7) acs -> . PUBLIC
+    (8) acs -> . PROTECTED
+    (9) acs -> .
+
+  ! shift/reduce conflict for BOOL resolved as shift
+  ! shift/reduce conflict for CHAR resolved as shift
+  ! shift/reduce conflict for BYTE resolved as shift
+  ! shift/reduce conflict for SHORT resolved as shift
+  ! shift/reduce conflict for INT resolved as shift
+  ! shift/reduce conflict for LONG resolved as shift
+  ! shift/reduce conflict for DOUBLE resolved as shift
+  ! shift/reduce conflict for FLOAT resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+    }               shift and go to state 39
+    IF              shift and go to state 22
+    WHILE           shift and go to state 23
+    SWITCH          shift and go to state 24
+    ID              shift and go to state 26
+    BOOL            shift and go to state 28
+    CHAR            shift and go to state 29
+    BYTE            shift and go to state 30
+    SHORT           shift and go to state 31
+    INT             shift and go to state 32
+    LONG            shift and go to state 33
+    DOUBLE          shift and go to state 34
+    FLOAT           shift and go to state 35
+    MAIN            shift and go to state 36
+    PRIVATE         shift and go to state 5
+    PUBLIC          shift and go to state 6
+    PROTECTED       shift and go to state 7
+    STATIC          reduce using rule 9 (acs -> .)
+
+  ! BOOL            [ reduce using rule 9 (acs -> .) ]
+  ! CHAR            [ reduce using rule 9 (acs -> .) ]
+  ! BYTE            [ reduce using rule 9 (acs -> .) ]
+  ! SHORT           [ reduce using rule 9 (acs -> .) ]
+  ! INT             [ reduce using rule 9 (acs -> .) ]
+  ! LONG            [ reduce using rule 9 (acs -> .) ]
+  ! DOUBLE          [ reduce using rule 9 (acs -> .) ]
+  ! FLOAT           [ reduce using rule 9 (acs -> .) ]
+  ! ID              [ reduce using rule 9 (acs -> .) ]
+
+    acs                            shift and go to state 13
+    stmt                           shift and go to state 40
+    ifstmt                         shift and go to state 16
+    loopstmt                       shift and go to state 17
+    switchstmt                     shift and go to state 18
+    assignstmt                     shift and go to state 19
+    function                       shift and go to state 20
+    modifystmt                     shift and go to state 21
+    type                           shift and go to state 25
+    func                           shift and go to state 27
+
+state 15
+
+    (13) stmtlist -> stmt . ;
+
+    ;               shift and go to state 41
+
+
+state 16
+
+    (14) stmt -> ifstmt .
+
+    ;               reduce using rule 14 (stmt -> ifstmt .)
+
+
+state 17
+
+    (15) stmt -> loopstmt .
+
+    ;               reduce using rule 15 (stmt -> loopstmt .)
+
+
+state 18
+
+    (16) stmt -> switchstmt .
+
+    ;               reduce using rule 16 (stmt -> switchstmt .)
+
+
+state 19
+
+    (17) stmt -> assignstmt .
+
+    ;               reduce using rule 17 (stmt -> assignstmt .)
+
+
+state 20
+
+    (18) stmt -> function .
+
+    ;               reduce using rule 18 (stmt -> function .)
+
+
+state 21
+
+    (19) stmt -> modifystmt .
+
+    ;               reduce using rule 19 (stmt -> modifystmt .)
+
+
+state 22
+
+    (48) ifstmt -> IF .
+
+    ;               reduce using rule 48 (ifstmt -> IF .)
+
+
+state 23
+
+    (49) loopstmt -> WHILE .
+
+    ;               reduce using rule 49 (loopstmt -> WHILE .)
+
+
+state 24
+
+    (50) switchstmt -> SWITCH .
+
+    ;               reduce using rule 50 (switchstmt -> SWITCH .)
+
+
+state 25
+
+    (28) assignstmt -> type . ID = expression
+    (29) assignstmt -> type . ID
+
+    ID              shift and go to state 42
+
+
+state 26
+
+    (39) modifystmt -> ID . = expression
+    (38) type -> ID .
+
+    =               shift and go to state 43
+    ID              reduce using rule 38 (type -> ID .)
+
+
+state 27
+
+    (20) function -> func . ( args ) { methodstmt }
+
+    (               shift and go to state 44
+
+
+state 28
+
+    (30) type -> BOOL .
+
+    ID              reduce using rule 30 (type -> BOOL .)
+
+
+state 29
+
+    (31) type -> CHAR .
+
+    ID              reduce using rule 31 (type -> CHAR .)
+
+
+state 30
+
+    (32) type -> BYTE .
+
+    ID              reduce using rule 32 (type -> BYTE .)
+
+
+state 31
+
+    (33) type -> SHORT .
+
+    ID              reduce using rule 33 (type -> SHORT .)
+
+
+state 32
+
+    (34) type -> INT .
+
+    ID              reduce using rule 34 (type -> INT .)
+
+
+state 33
+
+    (35) type -> LONG .
+
+    ID              reduce using rule 35 (type -> LONG .)
+
+
+state 34
+
+    (36) type -> DOUBLE .
+
+    ID              reduce using rule 36 (type -> DOUBLE .)
+
+
+state 35
+
+    (37) type -> FLOAT .
+
+    ID              reduce using rule 37 (type -> FLOAT .)
+
+
+state 36
+
+    (25) func -> MAIN .
+
+    (               reduce using rule 25 (func -> MAIN .)
+
+
+state 37
+
+    (26) func -> acs static . rettype ID
+    (27) rettype -> . type
+    (30) type -> . BOOL
+    (31) type -> . CHAR
+    (32) type -> . BYTE
+    (33) type -> . SHORT
+    (34) type -> . INT
+    (35) type -> . LONG
+    (36) type -> . DOUBLE
+    (37) type -> . FLOAT
+    (38) type -> . ID
+
+    BOOL            shift and go to state 28
+    CHAR            shift and go to state 29
+    BYTE            shift and go to state 30
+    SHORT           shift and go to state 31
+    INT             shift and go to state 32
+    LONG            shift and go to state 33
+    DOUBLE          shift and go to state 34
+    FLOAT           shift and go to state 35
+    ID              shift and go to state 46
+
+    rettype                        shift and go to state 45
+    type                           shift and go to state 47
+
+state 38
+
+    (10) static -> STATIC .
+
+    BOOL            reduce using rule 10 (static -> STATIC .)
+    CHAR            reduce using rule 10 (static -> STATIC .)
+    BYTE            reduce using rule 10 (static -> STATIC .)
+    SHORT           reduce using rule 10 (static -> STATIC .)
+    INT             reduce using rule 10 (static -> STATIC .)
+    LONG            reduce using rule 10 (static -> STATIC .)
+    DOUBLE          reduce using rule 10 (static -> STATIC .)
+    FLOAT           reduce using rule 10 (static -> STATIC .)
+    ID              reduce using rule 10 (static -> STATIC .)
+
+
+state 39
+
+    (4) class -> acs CLASS classname { stmtlist } .
+
+    PRIVATE         reduce using rule 4 (class -> acs CLASS classname { stmtlist } .)
+    PUBLIC          reduce using rule 4 (class -> acs CLASS classname { stmtlist } .)
+    PROTECTED       reduce using rule 4 (class -> acs CLASS classname { stmtlist } .)
+    CLASS           reduce using rule 4 (class -> acs CLASS classname { stmtlist } .)
+    $end            reduce using rule 4 (class -> acs CLASS classname { stmtlist } .)
+
+
+state 40
+
+    (12) stmtlist -> stmtlist stmt . ;
+
+    ;               shift and go to state 48
+
+
+state 41
+
+    (13) stmtlist -> stmt ; .
+
+    }               reduce using rule 13 (stmtlist -> stmt ; .)
+    IF              reduce using rule 13 (stmtlist -> stmt ; .)
+    WHILE           reduce using rule 13 (stmtlist -> stmt ; .)
+    SWITCH          reduce using rule 13 (stmtlist -> stmt ; .)
+    ID              reduce using rule 13 (stmtlist -> stmt ; .)
+    BOOL            reduce using rule 13 (stmtlist -> stmt ; .)
+    CHAR            reduce using rule 13 (stmtlist -> stmt ; .)
+    BYTE            reduce using rule 13 (stmtlist -> stmt ; .)
+    SHORT           reduce using rule 13 (stmtlist -> stmt ; .)
+    INT             reduce using rule 13 (stmtlist -> stmt ; .)
+    LONG            reduce using rule 13 (stmtlist -> stmt ; .)
+    DOUBLE          reduce using rule 13 (stmtlist -> stmt ; .)
+    FLOAT           reduce using rule 13 (stmtlist -> stmt ; .)
+    MAIN            reduce using rule 13 (stmtlist -> stmt ; .)
+    PRIVATE         reduce using rule 13 (stmtlist -> stmt ; .)
+    PUBLIC          reduce using rule 13 (stmtlist -> stmt ; .)
+    PROTECTED       reduce using rule 13 (stmtlist -> stmt ; .)
+    STATIC          reduce using rule 13 (stmtlist -> stmt ; .)
+
+
+state 42
+
+    (28) assignstmt -> type ID . = expression
+    (29) assignstmt -> type ID .
+
+    =               shift and go to state 49
+    ;               reduce using rule 29 (assignstmt -> type ID .)
+
+
+state 43
+
+    (39) modifystmt -> ID = . expression
+    (40) expression -> . expression PLUS term
+    (41) expression -> . expression MINUS term
+    (44) expression -> . term
+    (42) term -> . term TIMES factor
+    (43) term -> . term DIVIDE factor
+    (45) term -> . factor
+    (46) factor -> . NUMBER
+    (47) factor -> . ( expression )
+
+    NUMBER          shift and go to state 53
+    (               shift and go to state 54
+
+    expression                     shift and go to state 50
+    term                           shift and go to state 51
+    factor                         shift and go to state 52
+
+state 44
+
+    (20) function -> func ( . args ) { methodstmt }
+    (22) args -> . args , type ID
+    (23) args -> . type ID
+    (24) args -> .
+    (30) type -> . BOOL
+    (31) type -> . CHAR
+    (32) type -> . BYTE
+    (33) type -> . SHORT
+    (34) type -> . INT
+    (35) type -> . LONG
+    (36) type -> . DOUBLE
+    (37) type -> . FLOAT
+    (38) type -> . ID
+
+    )               reduce using rule 24 (args -> .)
+    ,               reduce using rule 24 (args -> .)
+    BOOL            shift and go to state 28
+    CHAR            shift and go to state 29
+    BYTE            shift and go to state 30
+    SHORT           shift and go to state 31
+    INT             shift and go to state 32
+    LONG            shift and go to state 33
+    DOUBLE          shift and go to state 34
+    FLOAT           shift and go to state 35
+    ID              shift and go to state 46
+
+    args                           shift and go to state 55
+    type                           shift and go to state 56
+
+state 45
+
+    (26) func -> acs static rettype . ID
+
+    ID              shift and go to state 57
+
+
+state 46
+
+    (38) type -> ID .
+
+    ID              reduce using rule 38 (type -> ID .)
+
+
+state 47
+
+    (27) rettype -> type .
+
+    ID              reduce using rule 27 (rettype -> type .)
+
+
+state 48
+
+    (12) stmtlist -> stmtlist stmt ; .
+
+    }               reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    IF              reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    WHILE           reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    SWITCH          reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    ID              reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    BOOL            reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    CHAR            reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    BYTE            reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    SHORT           reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    INT             reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    LONG            reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    DOUBLE          reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    FLOAT           reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    MAIN            reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    PRIVATE         reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    PUBLIC          reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    PROTECTED       reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+    STATIC          reduce using rule 12 (stmtlist -> stmtlist stmt ; .)
+
+
+state 49
+
+    (28) assignstmt -> type ID = . expression
+    (40) expression -> . expression PLUS term
+    (41) expression -> . expression MINUS term
+    (44) expression -> . term
+    (42) term -> . term TIMES factor
+    (43) term -> . term DIVIDE factor
+    (45) term -> . factor
+    (46) factor -> . NUMBER
+    (47) factor -> . ( expression )
+
+    NUMBER          shift and go to state 53
+    (               shift and go to state 54
+
+    expression                     shift and go to state 58
+    term                           shift and go to state 51
+    factor                         shift and go to state 52
+
+state 50
+
+    (39) modifystmt -> ID = expression .
+    (40) expression -> expression . PLUS term
+    (41) expression -> expression . MINUS term
+
+    ;               reduce using rule 39 (modifystmt -> ID = expression .)
+    PLUS            shift and go to state 59
+    MINUS           shift and go to state 60
+
+
+state 51
+
+    (44) expression -> term .
+    (42) term -> term . TIMES factor
+    (43) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 44 (expression -> term .)
+    MINUS           reduce using rule 44 (expression -> term .)
+    ;               reduce using rule 44 (expression -> term .)
+    )               reduce using rule 44 (expression -> term .)
+    TIMES           shift and go to state 61
+    DIVIDE          shift and go to state 62
+
+
+state 52
+
+    (45) term -> factor .
+
+    TIMES           reduce using rule 45 (term -> factor .)
+    DIVIDE          reduce using rule 45 (term -> factor .)
+    PLUS            reduce using rule 45 (term -> factor .)
+    MINUS           reduce using rule 45 (term -> factor .)
+    ;               reduce using rule 45 (term -> factor .)
+    )               reduce using rule 45 (term -> factor .)
+
+
+state 53
+
+    (46) factor -> NUMBER .
+
+    TIMES           reduce using rule 46 (factor -> NUMBER .)
+    DIVIDE          reduce using rule 46 (factor -> NUMBER .)
+    PLUS            reduce using rule 46 (factor -> NUMBER .)
+    MINUS           reduce using rule 46 (factor -> NUMBER .)
+    ;               reduce using rule 46 (factor -> NUMBER .)
+    )               reduce using rule 46 (factor -> NUMBER .)
+
+
+state 54
+
+    (47) factor -> ( . expression )
+    (40) expression -> . expression PLUS term
+    (41) expression -> . expression MINUS term
+    (44) expression -> . term
+    (42) term -> . term TIMES factor
+    (43) term -> . term DIVIDE factor
+    (45) term -> . factor
+    (46) factor -> . NUMBER
+    (47) factor -> . ( expression )
+
+    NUMBER          shift and go to state 53
+    (               shift and go to state 54
+
+    expression                     shift and go to state 63
+    term                           shift and go to state 51
+    factor                         shift and go to state 52
+
+state 55
+
+    (20) function -> func ( args . ) { methodstmt }
+    (22) args -> args . , type ID
+
+    )               shift and go to state 64
+    ,               shift and go to state 65
+
+
+state 56
+
+    (23) args -> type . ID
+
+    ID              shift and go to state 66
+
+
+state 57
+
+    (26) func -> acs static rettype ID .
+
+    (               reduce using rule 26 (func -> acs static rettype ID .)
+
+
+state 58
+
+    (28) assignstmt -> type ID = expression .
+    (40) expression -> expression . PLUS term
+    (41) expression -> expression . MINUS term
+
+    ;               reduce using rule 28 (assignstmt -> type ID = expression .)
+    PLUS            shift and go to state 59
+    MINUS           shift and go to state 60
+
+
+state 59
+
+    (40) expression -> expression PLUS . term
+    (42) term -> . term TIMES factor
+    (43) term -> . term DIVIDE factor
+    (45) term -> . factor
+    (46) factor -> . NUMBER
+    (47) factor -> . ( expression )
+
+    NUMBER          shift and go to state 53
+    (               shift and go to state 54
+
+    term                           shift and go to state 67
+    factor                         shift and go to state 52
+
+state 60
+
+    (41) expression -> expression MINUS . term
+    (42) term -> . term TIMES factor
+    (43) term -> . term DIVIDE factor
+    (45) term -> . factor
+    (46) factor -> . NUMBER
+    (47) factor -> . ( expression )
+
+    NUMBER          shift and go to state 53
+    (               shift and go to state 54
+
+    term                           shift and go to state 68
+    factor                         shift and go to state 52
+
+state 61
+
+    (42) term -> term TIMES . factor
+    (46) factor -> . NUMBER
+    (47) factor -> . ( expression )
+
+    NUMBER          shift and go to state 53
+    (               shift and go to state 54
+
+    factor                         shift and go to state 69
+
+state 62
+
+    (43) term -> term DIVIDE . factor
+    (46) factor -> . NUMBER
+    (47) factor -> . ( expression )
+
+    NUMBER          shift and go to state 53
+    (               shift and go to state 54
+
+    factor                         shift and go to state 70
+
+state 63
+
+    (47) factor -> ( expression . )
+    (40) expression -> expression . PLUS term
+    (41) expression -> expression . MINUS term
+
+    )               shift and go to state 71
+    PLUS            shift and go to state 59
+    MINUS           shift and go to state 60
+
+
+state 64
+
+    (20) function -> func ( args ) . { methodstmt }
+
+    {               shift and go to state 72
+
+
+state 65
+
+    (22) args -> args , . type ID
+    (30) type -> . BOOL
+    (31) type -> . CHAR
+    (32) type -> . BYTE
+    (33) type -> . SHORT
+    (34) type -> . INT
+    (35) type -> . LONG
+    (36) type -> . DOUBLE
+    (37) type -> . FLOAT
+    (38) type -> . ID
+
+    BOOL            shift and go to state 28
+    CHAR            shift and go to state 29
+    BYTE            shift and go to state 30
+    SHORT           shift and go to state 31
+    INT             shift and go to state 32
+    LONG            shift and go to state 33
+    DOUBLE          shift and go to state 34
+    FLOAT           shift and go to state 35
+    ID              shift and go to state 46
+
+    type                           shift and go to state 73
+
+state 66
+
+    (23) args -> type ID .
+
+    )               reduce using rule 23 (args -> type ID .)
+    ,               reduce using rule 23 (args -> type ID .)
+
+
+state 67
+
+    (40) expression -> expression PLUS term .
+    (42) term -> term . TIMES factor
+    (43) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 40 (expression -> expression PLUS term .)
+    MINUS           reduce using rule 40 (expression -> expression PLUS term .)
+    ;               reduce using rule 40 (expression -> expression PLUS term .)
+    )               reduce using rule 40 (expression -> expression PLUS term .)
+    TIMES           shift and go to state 61
+    DIVIDE          shift and go to state 62
+
+
+state 68
+
+    (41) expression -> expression MINUS term .
+    (42) term -> term . TIMES factor
+    (43) term -> term . DIVIDE factor
+
+    PLUS            reduce using rule 41 (expression -> expression MINUS term .)
+    MINUS           reduce using rule 41 (expression -> expression MINUS term .)
+    ;               reduce using rule 41 (expression -> expression MINUS term .)
+    )               reduce using rule 41 (expression -> expression MINUS term .)
+    TIMES           shift and go to state 61
+    DIVIDE          shift and go to state 62
+
+
+state 69
+
+    (42) term -> term TIMES factor .
+
+    TIMES           reduce using rule 42 (term -> term TIMES factor .)
+    DIVIDE          reduce using rule 42 (term -> term TIMES factor .)
+    PLUS            reduce using rule 42 (term -> term TIMES factor .)
+    MINUS           reduce using rule 42 (term -> term TIMES factor .)
+    ;               reduce using rule 42 (term -> term TIMES factor .)
+    )               reduce using rule 42 (term -> term TIMES factor .)
+
+
+state 70
+
+    (43) term -> term DIVIDE factor .
+
+    TIMES           reduce using rule 43 (term -> term DIVIDE factor .)
+    DIVIDE          reduce using rule 43 (term -> term DIVIDE factor .)
+    PLUS            reduce using rule 43 (term -> term DIVIDE factor .)
+    MINUS           reduce using rule 43 (term -> term DIVIDE factor .)
+    ;               reduce using rule 43 (term -> term DIVIDE factor .)
+    )               reduce using rule 43 (term -> term DIVIDE factor .)
+
+
+state 71
+
+    (47) factor -> ( expression ) .
+
+    TIMES           reduce using rule 47 (factor -> ( expression ) .)
+    DIVIDE          reduce using rule 47 (factor -> ( expression ) .)
+    PLUS            reduce using rule 47 (factor -> ( expression ) .)
+    MINUS           reduce using rule 47 (factor -> ( expression ) .)
+    ;               reduce using rule 47 (factor -> ( expression ) .)
+    )               reduce using rule 47 (factor -> ( expression ) .)
+
+
+state 72
+
+    (20) function -> func ( args ) { . methodstmt }
+    (21) methodstmt -> . IF BOOL
+
+    IF              shift and go to state 75
+
+    methodstmt                     shift and go to state 74
+
+state 73
+
+    (22) args -> args , type . ID
+
+    ID              shift and go to state 76
+
+
+state 74
+
+    (20) function -> func ( args ) { methodstmt . }
+
+    }               shift and go to state 77
+
+
+state 75
+
+    (21) methodstmt -> IF . BOOL
+
+    BOOL            shift and go to state 78
+
+
+state 76
+
+    (22) args -> args , type ID .
+
+    )               reduce using rule 22 (args -> args , type ID .)
+    ,               reduce using rule 22 (args -> args , type ID .)
+
+
+state 77
+
+    (20) function -> func ( args ) { methodstmt } .
+
+    ;               reduce using rule 20 (function -> func ( args ) { methodstmt } .)
+
+
+state 78
+
+    (21) methodstmt -> IF BOOL .
+
+    }               reduce using rule 21 (methodstmt -> IF BOOL .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for BOOL in state 12 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 12 resolved as shift
+WARNING: shift/reduce conflict for BYTE in state 12 resolved as shift
+WARNING: shift/reduce conflict for SHORT in state 12 resolved as shift
+WARNING: shift/reduce conflict for INT in state 12 resolved as shift
+WARNING: shift/reduce conflict for LONG in state 12 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE in state 12 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 12 resolved as shift
+WARNING: shift/reduce conflict for ID in state 12 resolved as shift
+WARNING: shift/reduce conflict for BOOL in state 14 resolved as shift
+WARNING: shift/reduce conflict for CHAR in state 14 resolved as shift
+WARNING: shift/reduce conflict for BYTE in state 14 resolved as shift
+WARNING: shift/reduce conflict for SHORT in state 14 resolved as shift
+WARNING: shift/reduce conflict for INT in state 14 resolved as shift
+WARNING: shift/reduce conflict for LONG in state 14 resolved as shift
+WARNING: shift/reduce conflict for DOUBLE in state 14 resolved as shift
+WARNING: shift/reduce conflict for FLOAT in state 14 resolved as shift
+WARNING: shift/reduce conflict for ID in state 14 resolved as shift

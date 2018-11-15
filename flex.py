@@ -6,6 +6,7 @@ reserved = {
     'then': 'THEN',
     'else': 'ELSE',
     'while': 'WHILE',
+    "switch": "SWITCH",
     'bool': "BOOL",
     'char': "CHAR",
     'byte': "BYTE",
@@ -18,7 +19,8 @@ reserved = {
     'class': "CLASS",
     'pub': "PUBLIC",
     'pri': "PRIVATE",
-    'pro ': "PROTECTED"
+    'pro ': "PROTECTED",
+    'static': "STATIC"
 }
 
 # (?i) - case insensitive
